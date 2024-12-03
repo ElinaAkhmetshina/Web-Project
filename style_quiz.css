@@ -1,0 +1,56 @@
+.quiz{
+    background-color: #c3e0e5;
+    color: #274472;
+    border: solid #274472;
+    border-radius: 15px;
+    padding: 15px;
+    margin: 100px;
+}
+
+
+.question {
+    display: none;
+}
+
+.question.active {
+    display: block;
+}
+
+.button_inactive {
+    background-color: #c3e0e5;
+    color: #274472;
+    border: solid #274472;
+    border-radius: 15px;
+    margin: auto;
+    padding: 10px 20px;
+    margin-bottom: 10px;
+}
+.button_active {
+    background-color: #274472;
+    color: #c3e0e5;
+    border: solid #c3e0e5;
+    border-radius: 15px;
+    margin: auto;
+    padding: 10px 20px;
+    margin-bottom: 10px;
+}
+
+.submit_button {
+    background-color: #274472;
+    border: solid #c3e0e5;
+    color: #c3e0e5;
+    border-radius: 15px;
+    text-align: center;
+    transition-duration: 0.4s;
+    cursor: pointer;
+
+    padding: 15px 25px;
+    display: block;
+    margin: 20px auto;   
+
+}
+.submit_button:hover {
+    background-color: #c3e0e5;
+    border: solid #274472;
+    color: #274472;
+}

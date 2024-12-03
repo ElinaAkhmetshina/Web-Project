@@ -1,0 +1,94 @@
+body {
+    background-color: #41729f;
+    font-family: 'Times New Roman', serif;
+    text-align: center;
+}
+header, footer {
+    background-color: #274472;
+    border: solid #c3e0e5;
+    color: #c3e0e5;
+    padding: 25px;
+    border-radius: 15px;
+    margin: auto;
+}
+.footer_nav {
+    width: 100px;
+    text-align: center;
+
+    background-color: #5885af;
+    border-radius: 15px;
+    border: solid #c3e0e5;
+
+    margin: auto;
+    padding: 15px;
+}
+.about_info{
+    background-color: #5885af;
+    border: solid #c3e0e5;
+    border-radius: 15px;
+    padding: 15px;
+    margin: auto;
+
+    width: 300px;
+    text-align: center;
+}
+.navbar {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 10px;
+    margin: 10px;
+
+    background-color: #5885af;
+    border: solid #c3e0e5;
+    border-radius: 15px;
+}
+
+.main{
+    margin: 50px;
+}
+.card_deck {
+    display: grid;
+    align-items: center;
+    gap: 20px;
+    grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+}
+.card {
+    height: 550px;
+    background-color: #274472;
+    border: solid #c3e0e5;
+    border-radius: 15px;
+}
+.card img {
+    width: 250px;
+    height: 250px;
+    object-fit: fill;
+    border-radius: 15px;
+    border: solid #c3e0e5;
+    margin: 5px;
+}
+.card_text{
+    margin: 10px;
+    color:#c3e0e5;
+}
+
+
+.start_button {
+    border: solid #274472;
+    background-color: #c3e0e5;
+    border-radius: 15px;
+    color: #274472; 
+    text-align: center;
+    transition-duration: 0.4s;
+    cursor: pointer;
+
+    padding: 16px 32px;
+    display: inline-block;
+    font-size: 16px;
+    margin: 4px 2px;
+}
+.start_button:hover {
+    background-color: #274472;
+    border: solid #c3e0e5;
+    color: #c3e0e5;
+}

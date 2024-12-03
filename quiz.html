@@ -1,0 +1,314 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Quiz</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="style_quiz.css">
+</head>
+<body>
+    <header id="header">
+        <nav class="navbar">
+            <h2>Site Navigation</h2>
+            <a href="home.html">Home</a> |
+            <a href="quiz.html">Quiz</a>
+        </nav>
+    </header>
+
+    <div class="quiz">
+        <h1>Quiz</h1>
+        <div id="quiz_container" class="quiz_container">
+            <p>Are you ready to start the quiz?</p>
+            <button id="start_button" class="start_button">Start Quiz</button>
+        </div>
+    </div>
+
+    <script>
+        let current_question = 0;
+        let correct_heroes = 0;
+        let correct_villains = 0;
+        let correct_movies = 0;
+        let correct_games = 0;
+        let correct_animation = 0;
+        let correct_history = 0;
+
+        const questions = [
+            {
+                category: "Heroes",
+                question: "Batman's real name?",
+                answers: ["Clark Kent", "Bruce Wayne", "Barry Allen", "Richard Grayson", "Hal Jordan"],
+                correct_answer: "Bruce Wayne"
+            },
+            {
+                category: "Villains",
+                question: "Who is known as Superman's arch-nemesis with brilliant mind?",
+                answers: ["Solomon Grundy", "Riddler", "Proffesor Zoom", "Lex Luthor", "Metallo"],
+                correct_answer: "Lex Luthor"
+            },
+            {
+                category: "Movies",
+                question: "In which movie did Henry Cavill first appear as Superman in the DC Extended Universe?",
+                answers: ["Man of Steel", "Justice League", "Superman", "Batman", "Batman v Superman: Dawn of Justice"],
+                correct_answer: "Man of Steel"
+            },
+            {
+                category: "Games",
+                question: "In which video game does Batman face off against the Lady Arkham?",
+                answers: ["Batman: Arkham Knight", "Batman: Arkham Asylum", "Batman: The Telltale Series", "Injustice 2", "Batman: Arkham City"],
+                correct_answer: "Batman: The Telltale Series"
+            },
+            {
+                category: "Animation",
+                question: "Which animated series features a team of young superheroes including Robin, Starfire, and Raven?",
+                answers: ["Young Titans", "Young Justice", "Teen Justice", "Titans League", "Teen Titans"],
+                correct_answer: "Teen Titans"
+            },
+            {
+                category: "History",
+                question: "Who was the first superhero to appear in DC Comics?",
+                answers: ["Superman", "Batman", "Wonder Woman", "The Flash", "Green Lantern"],
+                correct_answer: "Superman"
+            },
+            {
+                category: "Heroes",
+                question: "Pick the person who is one of canon robins:",
+                answers: ["John Kent", "Kate Cane", "Richard Grayson", "Barbara Gordon", "Wally West"],
+                correct_answer: "Richard Grayson"
+            },
+            {
+                category: "Villains",
+                question: "Is Bizarro a Superman's clon?",
+                answers: ["True", "False"],
+                correct_answer: "True"
+            },
+            {
+                category: "Movies",
+                question: "For many people this movie is one of the worst (if not the worst) superhero movies of all time",
+                answers: ["The LEGO Batman Movie (2017)", "Batman & Robin (1997)", "The Dark Knight (2008)", "Shazam! (2019)", "The Batman (2022)"],
+                correct_answer: "Batman & Robin (1997)"
+            },
+            {
+                category: "Games",
+                question: "Did Batman: Arkham Asylum won a GOTY award?",
+                answers: ["True", "False"],
+                correct_answer: "True"
+            },
+            {
+                category: "Animation",
+                question: "Which of the listed below movies is NOT an alternnative universe?",
+                answers: ["Superman: Red Son", "Batman: Gotham by Gaslight", "Justice League: Gods and Monsters", "Reign of the Supermen", "Injustice"],
+                correct_answer: "Reign of the Supermen"
+            },
+            {
+                category: "History",
+                question: "What is the name of the Flash",
+                answers: ["Bartholomew", "Barrence", "Barry", "Bart", "Buried"],
+                correct_answer: "Bartholomew"
+            },
+            {
+                category: "Heroes",
+                question: "Which hero is known as the 'Emerald Knight'?",
+                answers: ["Hal Jordan", "Billy Batson", "Bruce Wayne", "Lex Luthor", "Clark Kent"],
+                correct_answer: "Hal Jordan"
+            },
+            {
+                category: "Villains",
+                question: "Pick one who doesn't belong in The Flash's Rogue Gallery",
+                answers: ["Captain Cold", "Mirror Master", "Weather Wizard", "Abra Kadabra", "Felix Faust"],
+                correct_answer: "Felix Faust"
+            },
+            {
+                category: "Movies",
+                question: "Is there a 4 hour long version of the Justice League(2017)?",
+                answers: ["True", "False"],
+                correct_answer: "True"
+            },
+            {
+                category: "Games",
+                question: "Which game features an open-world version of Gotham City, where players control Batman?",
+                answers: ["Batman: The Telltale Series", "Batman: Arkham Asylum", "Gotham Knights", "Batman: Arkham City", "Injustice: Gods Among Us"],
+                correct_answer: "Batman: Arkham City"
+            },
+            {
+                category: "Animation",
+                question: "Which animated film depicts a battle between Batman and the Robin, murdered by the Joker?",
+                answers: ["Batman vs. Robin", "Batman: Mask of the Phantasm", "Batman: Bad Blood", "Batman: The Killing Joke", "Batman: Under the Red Hood"],
+                correct_answer: "Batman: Under the Red Hood"
+            },
+            {
+                category: "History",
+                question: "What year did DC Comics launch the 'New 52' initiative, which rebooted many of their series?",
+                answers: ["2011", "2015", "2005", "2013", "2018"],
+                correct_answer: "2011"
+            },
+            {
+                category: "Heroes",
+                question: "DC once had a character called Captain Marvel",
+                answers: ["True", "False"],
+                correct_answer: "True"
+            },
+            {
+                category: "Villains",
+                question: "Who is the main villain in the 'Injustice' storyline, where he becomes a tyrant?",
+                answers: ["Darkseid", "Lex Luthor", "Sinestro", "Riddler", "Superman"],
+                correct_answer: "Superman"
+            },
+            {
+                category: "Movies",
+                question: "Who directed the 1989 'Batman' movie starring Michael Keaton?",
+                answers: ["Steven Spielberg", "Tim Burton", "Zack Snyder", "Christopher Nolan", "Richard Donner"],
+                correct_answer: "Tim Burton"
+            },
+            {
+                category: "Games",
+                question: "In which game do players control a group of Gotham's heroes, including Batgirl, Robin, and Nightwing?",
+                answers: ["Batman: Arkham Knight", "Batman: Arkham City", "Gotham Knights", "Batman: The Telltale Series", "Batman: Enemy Within"],
+                correct_answer: "Gotham Knights"
+            },
+            {
+                category: "Animation",
+                question: "Justice League Unlimited follows the adventures of the Justice League after the team is reformed in the 2000s?",
+                answers: ["True", "False"],
+                correct_answer: "True"
+            },
+            {
+                category: "History",
+                question: "In the Silver Age of Comic Books, DC released a new version of the Flash, From which to which flash was the transition?",
+                answers: ["Barry to Wally", "Jay to Wally", "Jay to Barry", "Bart to Barry", "Bart to Jay"],
+                correct_answer: "Jay to Barry"
+            },
+            {
+                category: "Heroes",
+                question: "Green Lantern Corps, because it's their weakness, are unable to affect anything coloured red",
+                answers: ["True", "False"],
+                correct_answer: "False"
+            },
+            {
+                category: "Villains",
+                question: "Who is known as the 'Lord of Apokolips' and a major antagonist in the DC Universe?",
+                answers: ["Brainiac", "Darkseid", "Vandal Savage", "Doomsday", "R'as al Ghul"],
+                correct_answer: "Darkseid"
+            },
+            {
+                category: "Movies",
+                question: "Which movie features the first live-action appearance of Wonder Woman, portrayed by Gal Gadot?",
+                answers: ["Batman v Superman: Dawn of Justice", "Man of Steel", "Justice League", "Wonder Woman", "Suicide Squad"],
+                correct_answer: "Batman v Superman: Dawn of Justice"
+            },
+            {
+                category: "Games",
+                question: "With which franchise of fighting video games did DC made a game with?",
+                answers: ["Mortal Kombat", "Street Fighter", "Tekken", "Skullgirls", "Ultimate Marvel vs. Capcom 3"],
+                correct_answer: "Mortal Kombat"
+            },
+            {
+                category: "Animation",
+                question: "Which animated series focuses on the teenage heroes, including Robin, Kid Flash, Superboy, and Aqualad?",
+                answers: ["The Super Friends", "Teen Titans Go!", "Teen Titans", "Young Justice", "DC Superhero Girls"],
+                correct_answer: "Young Justice"
+            },
+            {
+                category: "History",
+                question: "Is it true that the original Superman couldn't fly? Or was he always able to do so?",
+                answers: ["True", "False"],
+                correct_answer: "True"
+            },
+        ];
+
+        function Quiz() {
+            const quiz_container = document.getElementById('quiz_container');
+            quiz_container.innerHTML = '';
+
+            const question = questions[current_question];
+            const question_div = document.createElement('div');
+            question_div.classList.add('question', 'active');
+
+            question_div.innerHTML = `
+                <h2>Question ${current_question + 1}</h2>
+                <h3>Category: ${question.category}</h3>
+                <p>${question.question}</p>
+            `;
+
+            let selected_answer = null;
+            question.answers.forEach(answer => {
+                const answer_button = document.createElement('button');
+                answer_button.textContent = answer;
+                answer_button.classList.add('button_inactive');
+                answer_button.addEventListener('click', function () {
+                    if (selected_answer) {
+                        selected_answer.classList.remove('button_active');
+                    }
+                    answer_button.classList.add('button_active');
+                    selected_answer = answer_button;
+                    submit_button.disabled = false;
+                });
+                question_div.appendChild(answer_button);
+            });
+
+            const submit_button = document.createElement('button');
+            submit_button.textContent = 'Next Question';
+            submit_button.classList.add('submit_button');
+            submit_button.disabled = true;
+            submit_button.addEventListener('click', function () {
+                if (selected_answer && selected_answer.textContent === question.correct_answer) {
+                    if (question.category === "Heroes") {
+                        correct_heroes++;
+                    } else if (question.category === "Villains") {
+                        correct_villains++;
+                    } else if (question.category === "Movies") {
+                        correct_movies++;
+                    } else if (question.category === "Games") {
+                        correct_games++;
+                    } else if (question.category === "Animation") {
+                        correct_animation++;
+                    } else if (question.category === "History") {
+                        correct_history++;
+                    }
+                }
+                goToNextQuestion();
+            });
+
+            question_div.appendChild(submit_button);
+            quiz_container.appendChild(question_div);
+        }
+
+        function Result(){
+            const result_container = document.getElementById('quiz_container');
+            result_container.innerHTML = '';
+
+            result_container.innerHTML = `
+                <h2>You have Completed the Quiz!</h2>
+                <h3>Your score is:: ${correct_heroes+correct_villains+correct_games+correct_movies+correct_animation+correct_history}/30</h3>
+                <p>Category Heroes:${correct_heroes}</p>
+                <p>Category Villains:${correct_villains}</p>
+                <p>Category Movies:${correct_movies}</p>
+                <p>Category Games:${correct_games}</p>
+                <p>Category Animation:${correct_animation}</p>
+                <p>Category History:${correct_history}</p>
+            `;
+
+        }
+
+        function goToNextQuestion() {
+            current_question++;
+            if (current_question < questions.length) {
+                Quiz();
+            } else {
+                Result();
+            }
+        }
+
+        document.getElementById("start_button").onclick = function() {
+            Quiz();
+        };
+    </script>
+
+    <footer id="about">
+        <nav class="footer_nav">
+            <a href="#header">To the Top!</a>
+        </nav>
+        <p>Based on characters by DC Comics™</p>
+    </footer>
+</body>
+</html>
